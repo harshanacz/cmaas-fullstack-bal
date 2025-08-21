@@ -1,6 +1,10 @@
 
 import ballerina/log;
 import ballerina/os;
+import ballerina/sql;
+import ballerinax/postgresql;
+import ballerina/uuid;
+import ballerina/crypto;
 
 // Data types
 public type Developer record {|
@@ -97,8 +101,8 @@ public type QuotaInfo record {|
     boolean isActive;
 |};
 
-// Database connection placeholder (will be implemented in task 2.2)
-// postgresql:Client? dbClient = ();
+// Database connection
+postgresql:Client? dbClient = ();
 
 // Helper function to get string environment variable with default
 function getStringEnv(string key, string defaultValue) returns string {

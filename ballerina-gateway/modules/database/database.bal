@@ -1,5 +1,5 @@
 import ballerinax/postgresql;
-import ballerina/log;
+import ballerina/io;
 import gateway/api_gateway.config;
 
 // Database connection and utilities
@@ -17,7 +17,7 @@ public class DatabaseClient {
             password = dbConfig.password
         );
         
-        log:printInfo("Database connection established");
+        io:println("Database connection established");
     }
 
     // Get the database client for queries
@@ -34,7 +34,7 @@ public class DatabaseClient {
     public function healthCheck() returns boolean {
         var result = self.dbClient->execute(`SELECT 1`);
         if result is error {
-            log:printError("Database health check failed", result);
+            io:println("Database health check failed: " + result.message());
             return false;
         }
         return true;
@@ -48,7 +48,7 @@ DatabaseClient? dbClient = ();
 public function initDatabase(config:DatabaseConfig dbConfig) returns error? {
     DatabaseClient newClient = check new(dbConfig);
     dbClient = newClient;
-    log:printInfo("Database client initialized");
+    io:println("Database client initialized");
 }
 
 // Get database client instance

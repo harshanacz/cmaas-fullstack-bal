@@ -1,18 +1,18 @@
-import ballerina/log;
+import ballerina/io;
 
 // Main entry point for the API Gateway
 public function main() returns error? {
-    log:printInfo("Starting Ballerina API Gateway...");
+    io:println("Starting Ballerina API Gateway...");
     
     // Start the HTTP listeners
     check startServices();
     
-    log:printInfo("API Gateway started successfully");
+    io:println("API Gateway started successfully");
 }
 
 // Function to start all HTTP services
 function startServices() returns error? {
     // This will be implemented in subsequent tasks
-    log:printInfo("Services initialization placeholder");
+    io:println("Services initialization placeholder");
     return;
 }

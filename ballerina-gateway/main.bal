@@ -1,4 +1,3 @@
-import ballerina/http;
 import ballerina/log;
 
 // Main entry point for the API Gateway

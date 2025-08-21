@@ -43,22 +43,30 @@ public type AppConfig record {
 
 // Load configuration from environment variables
 public function loadConfig() returns AppConfig {
+    string dbHost = os:getEnv("DB_HOST");
+    string dbName = os:getEnv("DB_NAME");
+    string dbUser = os:getEnv("DB_USER");
+    string dbPassword = os:getEnv("DB_PASSWORD");
+    string jwtSecret = os:getEnv("JWT_SECRET");
+    string jwtIssuer = os:getEnv("JWT_ISSUER");
+    string pythonUrl = os:getEnv("PYTHON_SERVICE_URL");
+    
     return {
         database: {
-            host: os:getEnv("DB_HOST") ?: "localhost",
+            host: dbHost != "" ? dbHost : "localhost",
             port: getIntEnv("DB_PORT", 5432),
-            database: os:getEnv("DB_NAME") ?: "gateway_db",
-            username: os:getEnv("DB_USER") ?: "gateway_user",
-            password: os:getEnv("DB_PASSWORD") ?: "gateway_pass",
+            database: dbName != "" ? dbName : "gateway_db",
+            username: dbUser != "" ? dbUser : "gateway_user",
+            password: dbPassword != "" ? dbPassword : "gateway_pass",
             maxPoolSize: getIntEnv("DB_MAX_POOL_SIZE", 10)
         },
         jwt: {
-            secretKey: os:getEnv("JWT_SECRET") ?: "default-secret-key-change-in-production",
+            secretKey: jwtSecret != "" ? jwtSecret : "default-secret-key-change-in-production",
             expirationTime: getIntEnv("JWT_EXPIRATION", 3600), // 1 hour
-            issuer: os:getEnv("JWT_ISSUER") ?: "ballerina-gateway"
+            issuer: jwtIssuer != "" ? jwtIssuer : "ballerina-gateway"
         },
         pythonService: {
-            baseUrl: os:getEnv("PYTHON_SERVICE_URL") ?: "http://localhost:8001",
+            baseUrl: pythonUrl != "" ? pythonUrl : "http://localhost:8001",
             timeoutMs: getIntEnv("PYTHON_SERVICE_TIMEOUT", 30000),
             retryAttempts: getIntEnv("PYTHON_SERVICE_RETRIES", 3)
         },

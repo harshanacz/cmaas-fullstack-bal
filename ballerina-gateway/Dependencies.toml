@@ -9,15 +9,6 @@ distribution-version = "2201.12.7"
 
 [[package]]
 org = "ballerina"
-name = "crypto"
-version = "2.4.0"
-dependencies = [
-	{org = "ballerina", name = "jballerina.java"},
-	{org = "ballerina", name = "time"}
-]
-
-[[package]]
-org = "ballerina"
 name = "io"
 version = "1.8.0"
 dependencies = [
@@ -28,11 +19,6 @@ dependencies = [
 [[package]]
 org = "ballerina"
 name = "jballerina.java"
-version = "0.0.0"
-
-[[package]]
-org = "ballerina"
-name = "lang.object"
 version = "0.0.0"
 
 [[package]]
@@ -78,31 +64,6 @@ modules = [
 ]
 
 [[package]]
-org = "ballerina"
-name = "sql"
-version = "1.9.0"
-dependencies = [
-	{org = "ballerina", name = "io"},
-	{org = "ballerina", name = "jballerina.java"},
-	{org = "ballerina", name = "lang.object"},
-	{org = "ballerina", name = "time"}
-]
-modules = [
-	{org = "ballerina", packageName = "sql", moduleName = "sql"}
-]
-
-[[package]]
-org = "ballerina"
-name = "time"
-version = "2.3.0"
-dependencies = [
-	{org = "ballerina", name = "jballerina.java"}
-]
-modules = [
-	{org = "ballerina", packageName = "time", moduleName = "time"}
-]
-
-[[package]]
 org = "ballerinai"
 name = "observe"
 version = "0.0.0"
@@ -115,31 +76,13 @@ modules = [
 ]
 
 [[package]]
-org = "ballerinax"
-name = "postgresql"
-version = "1.9.0"
-dependencies = [
-	{org = "ballerina", name = "crypto"},
-	{org = "ballerina", name = "io"},
-	{org = "ballerina", name = "jballerina.java"},
-	{org = "ballerina", name = "sql"},
-	{org = "ballerina", name = "time"}
-]
-modules = [
-	{org = "ballerinax", packageName = "postgresql", moduleName = "postgresql"}
-]
-
-[[package]]
 org = "gateway"
 name = "api_gateway"
 version = "0.1.0"
 dependencies = [
 	{org = "ballerina", name = "log"},
 	{org = "ballerina", name = "os"},
-	{org = "ballerina", name = "sql"},
-	{org = "ballerina", name = "time"},
-	{org = "ballerinai", name = "observe"},
-	{org = "ballerinax", name = "postgresql"}
+	{org = "ballerinai", name = "observe"}
 ]
 modules = [
 	{org = "gateway", packageName = "api_gateway", moduleName = "api_gateway"}

@@ -24,9 +24,6 @@ dependencies = [
 	{org = "ballerina", name = "jballerina.java"},
 	{org = "ballerina", name = "lang.value"}
 ]
-modules = [
-	{org = "ballerina", packageName = "io", moduleName = "io"}
-]
 
 [[package]]
 org = "ballerina"
@@ -44,6 +41,20 @@ name = "lang.value"
 version = "0.0.0"
 dependencies = [
 	{org = "ballerina", name = "jballerina.java"}
+]
+
+[[package]]
+org = "ballerina"
+name = "log"
+version = "2.12.0"
+dependencies = [
+	{org = "ballerina", name = "io"},
+	{org = "ballerina", name = "jballerina.java"},
+	{org = "ballerina", name = "lang.value"},
+	{org = "ballerina", name = "observe"}
+]
+modules = [
+	{org = "ballerina", packageName = "log", moduleName = "log"}
 ]
 
 [[package]]
@@ -75,6 +86,9 @@ dependencies = [
 	{org = "ballerina", name = "jballerina.java"},
 	{org = "ballerina", name = "lang.object"},
 	{org = "ballerina", name = "time"}
+]
+modules = [
+	{org = "ballerina", packageName = "sql", moduleName = "sql"}
 ]
 
 [[package]]
@@ -120,16 +134,14 @@ org = "gateway"
 name = "api_gateway"
 version = "0.1.0"
 dependencies = [
-	{org = "ballerina", name = "io"},
+	{org = "ballerina", name = "log"},
 	{org = "ballerina", name = "os"},
+	{org = "ballerina", name = "sql"},
 	{org = "ballerina", name = "time"},
 	{org = "ballerinai", name = "observe"},
 	{org = "ballerinax", name = "postgresql"}
 ]
 modules = [
-	{org = "gateway", packageName = "api_gateway", moduleName = "api_gateway"},
-	{org = "gateway", packageName = "api_gateway", moduleName = "api_gateway.config"},
-	{org = "gateway", packageName = "api_gateway", moduleName = "api_gateway.database"},
-	{org = "gateway", packageName = "api_gateway", moduleName = "api_gateway.types"}
+	{org = "gateway", packageName = "api_gateway", moduleName = "api_gateway"}
 ]
 

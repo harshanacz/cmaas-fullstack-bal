@@ -1,0 +1,114 @@
+version: '3.8'
+
+services:
+  # PostgreSQL database
+  postgres:
+    image: postgres:15-alpine
+    container_name: gateway-postgres
+    environment:
+      POSTGRES_DB: gateway_db
+      POSTGRES_USER: gateway_user
+      POSTGRES_PASSWORD: gateway_pass
+      POSTGRES_INITDB_ARGS: "--auth-host=scram-sha-256 --auth-local=scram-sha-256"
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/init.sql:/docker-entrypoint-initdb.d/01-init.sql
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/02-schema.sql
+    networks:
+      - gateway-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U gateway_user -d gateway_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Ballerina API Gateway
+  gateway:
+    build:
+      context: ./ballerina-gateway
+      dockerfile: Dockerfile
+    container_name: gateway-service
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: gateway_db
+      DB_USER: gateway_user
+      DB_PASSWORD: gateway_pass
+      DB_MAX_POOL_SIZE: 10
+      JWT_SECRET: "your-super-secret-jwt-key-change-in-production"
+      JWT_EXPIRATION: 3600
+      JWT_ISSUER: "ballerina-gateway"
+      PYTHON_SERVICE_URL: "http://python-service:8001"
+      PYTHON_SERVICE_TIMEOUT: 30000
+      PYTHON_SERVICE_RETRIES: 3
+      RATE_LIMIT_PER_MINUTE: 10
+      RATE_LIMIT_BURST: 20
+      SERVER_PORT: 8080
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - gateway-network
+    volumes:
+      - ./ballerina-gateway:/app
+    working_dir: /app
+
+  # Mock Python service for development
+  python-service:
+    image: wiremock/wiremock:latest
+    container_name: mock-python-service
+    ports:
+      - "8001:8080"
+    volumes:
+      - ./mock-services/python:/home/wiremock
+    networks:
+      - gateway-network
+    command: ["--global-response-templating", "--verbose"]
+
+  # Next.js Developer Portal
+  portal:
+    build:
+      context: ./user-portal
+      dockerfile: Dockerfile.dev
+    container_name: gateway-portal
+    environment:
+      NEXT_PUBLIC_API_URL: "http://localhost:8080"
+      NODE_ENV: development
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./user-portal:/app
+      - /app/node_modules
+    networks:
+      - gateway-network
+    depends_on:
+      - gateway
+
+  # pgAdmin for database management (optional)
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: gateway-pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@gateway.local
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
+    networks:
+      - gateway-network
+    profiles:
+      - tools
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  gateway-network:
+    driver: bridge

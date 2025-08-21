@@ -1,0 +1,18 @@
+{
+  "request": {
+    "method": "POST",
+    "urlPath": "/api/v1/moderation/moderate"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "result": "approved",
+      "confidence": 0.95,
+      "reasons": [],
+      "processed_at": "{{now format='yyyy-MM-dd HH:mm:ss'}}"
+    }
+  }
+}

@@ -1,0 +1,209 @@
+# Ballerina API Gateway - .gitignore
+
+# Kiro spec files (development artifacts)
+.kiro/specs/
+
+# Environment variables and secrets
+.env
+.kiro/
+.env.local
+.env.production
+.env.staging
+*.env
+
+# Ballerina build artifacts
+target/
+.ballerina/
+*.jar
+
+# Ballerina cache
+.ballerina-cache/
+
+# Node.js dependencies and build artifacts
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+.yarn/
+dist/
+build/
+.next/
+out/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+*.lcov
+.nyc_output
+
+# Dependency directories
+jspm_packages/
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Microbundle cache
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# parcel-bundler cache (https://parceljs.org/)
+.cache
+.parcel-cache
+
+# Next.js build output
+.next
+
+# Nuxt.js build / generate output
+.nuxt
+
+# Gatsby files
+.cache/
+public
+
+# Storybook build outputs
+.out
+.storybook-out
+
+# Temporary folders
+tmp/
+temp/
+
+# Database files (for local development)
+*.db
+*.sqlite
+*.sqlite3
+
+# Docker volumes and data
+docker-data/
+postgres-data/
+
+# Backup files
+*.bak
+*.backup
+*.old
+
+# Test coverage
+coverage/
+.coverage
+
+# Python cache (if any Python scripts are added)
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Java (if any Java dependencies)
+*.class
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Security and sensitive files
+*.pem
+*.key
+*.crt
+*.p12
+*.jks
+secrets/
+credentials/
+
+# Local configuration overrides
+config.local.*
+settings.local.*
+
+# Performance and profiling
+*.prof
+*.heap
+
+# Documentation build
+docs/_build/
+site/
+
+# Terraform (if infrastructure as code is added)
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+
+# Kubernetes secrets (if K8s deployment is added)
+*-secret.yaml
+*-secrets.yaml
+
+# Local development overrides
+docker-compose.override.yml
+docker-compose.local.yml
+
+# Generated API documentation
+api-docs/
+swagger-ui/
+
+# Monitoring and observability
+*.trace
+*.prof
+*.pprof
+
+# Local scripts and utilities
+scripts/local/
+utils/local/
+
+# Temporary test files
+test-results/
+test-output/
+*.test.log

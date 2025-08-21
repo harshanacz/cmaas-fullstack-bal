@@ -1,0 +1,18 @@
+{
+  "request": {
+    "method": "POST",
+    "urlPath": "/api/v1/moderation/add-rule"
+  },
+  "response": {
+    "status": 201,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "rule_id": "{{randomValue type='UUID'}}",
+      "api_key": "{{request.body 'api_key'}}",
+      "rule_text": "{{request.body 'rule_text'}}",
+      "created_at": "{{now format='yyyy-MM-dd HH:mm:ss'}}"
+    }
+  }
+}

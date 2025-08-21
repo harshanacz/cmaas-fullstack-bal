@@ -1,0 +1,18 @@
+# Ballerina build artifacts
+target/
+.ballerina/
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Environment files
+.env
+.env.local
